@@ -14,7 +14,6 @@ import re
 import speech_recognition as sr
 import pyttsx3
 import json
-import openai
 import os
 import speech_recognition as sr
 # import winsound  # Import winsound or a similar library for non-Windows systems

@@ -10,13 +10,8 @@
 # it under the terms of the MIT License as published by
 # the Massachusetts Institute of Technology. See the LICENSE file for details.
 
-import speech_recognition as sr
-import pyttsx3
 import json
-import openai
 import os
-import speech_recognition as sr
-# import winsound  # Import winsound or a similar library for non-Windows systems
 from openai import OpenAI
 import sys
 # Get the API key from the environment variable
