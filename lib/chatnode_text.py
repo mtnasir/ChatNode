@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # chatnode.py
 
-# Copyright (c) 2024 Mohammad Nasir
+# Copyright (c) 2024 mtnasir
+# Email: eng.m.naser@gmail.com
 #
 # This file is part of ChatNode.
 #
@@ -9,7 +10,6 @@
 # it under the terms of the MIT License as published by
 # the Massachusetts Institute of Technology. See the LICENSE file for details.
 
-import re
 import speech_recognition as sr
 import pyttsx3
 import json
@@ -36,50 +36,26 @@ class ChatNode:
                 api_key=openai_api_key,
             )
     
-    def beep(self,frequency, duration):
-        os.system(f'play -nq -t alsa synth {duration / 1000} sine {frequency}')
-
+ 
     def record_and_transcribe(self):
-        recognizer=self.recognizer
-        # Use default microphone as the audio source
-        with sr.Microphone() as source:
-            print("Listening...")
+        try:
+            # Prompt the user to enter some text
+            text = input("Write your response: ")
 
-            # Adjust for ambient noise with a shorter duration
-            recognizer.adjust_for_ambient_noise(source)
+            # Check if the input is empty
+            if not text.strip():
+                raise ValueError("Input cannot be empty. Please try again.")
 
-            # Beep to signal the start of recording
-            self.beep(500, 200)  # Reduce beep duration to 200 ms
+            print("You said:", text)
+            return text
 
-            # Record the audio with a timeout and phrase limit
-            audio = recognizer.listen(source, timeout=5)
-
-
-            print("Transcribing...")
-
-            try:
-                # Use Google Speech Recognition to transcribe the audio
-                text = recognizer.recognize_google(audio)
-                print("You said:", text)
-                return text
-            except sr.UnknownValueError:
-                print("Sorry, could not understand audio.")
-            except sr.RequestError as e:
-                print(f"Could not request results from Google Speech Recognition service; {e}")
+        except ValueError as ve:
+            print(ve)
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
     
     def SpeakText(self,command):
-        # Initialize the engine
-        engine = pyttsx3.init()
-
-        # Set properties for clearer speech
-        rate = engine.getProperty('rate')   # Get the current speaking rate
-        engine.setProperty('rate', rate - 50)  # Slow down the speech (default rate is around 200 words per minute)
-
-        volume = engine.getProperty('volume')  # Get the current volume level
-        engine.setProperty('volume', 1.0)  # Set volume level between 0.0 and 1.0
-
-        engine.say(command)
-        engine.runAndWait()
+        print("The chatbot says: "+command)
 
 
     def checker(self):

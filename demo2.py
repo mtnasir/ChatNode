@@ -1,4 +1,4 @@
-from lib.chatnode_voice import ChatNode
+from lib.chatnode_text import ChatNode
 import logging
 import os
 from datetime import datetime
