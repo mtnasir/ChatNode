@@ -11,6 +11,9 @@ current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 log_filename = os.path.join('log', f'logfile_{current_time}.log')  # Save inside 'log' folder
 # Configure logging with the dynamic filename
 logging.basicConfig(filename=log_filename, filemode='a', format='%(asctime)s - %(message)s', level=logging.INFO)
+
+###########################  Node1  ######################################
+
 gaol="talk to customer and inquire the customer to give the full information his name and age, if customer don't want the buy just finish done in nan"
 
 messages = [
@@ -31,7 +34,7 @@ if results=="nan":
     N1.endconv()
 
 logging.info(f'First node results value: {messages} \n {results},\n{summary1}, \n{json_out} ')
-####################################################################################################
+###########################  Node2  ######################################
 
 gaol=f"""  talk to customer and ask the customer if he want his order to be delevered by driver or not so the customer himself will reach the shop after fuew minites, if customer don't want the buy just finish done in nan.  the customer information given "information: {summary1}".  respond to the customer in 30 words."""
 print(summary1)
@@ -63,7 +66,7 @@ if results=="nan":
     N2.endconv()
 
 logging.info(f'Second node results value: {messages} \n {results},\n{summary2}, \n{json_out2} ')
-#################################################################################################3
+###########################  Node3  ######################################
 
 menu = {
     "Espresso": 2.50,
@@ -102,7 +105,8 @@ while cc:
         N3.endconv()
 
     logging.info(f'Third node results value: {messages} \n {results},\n{summary3}, \n{json_out3} ')
-    ###########################################################################################
+    ###########################  Node4  ######################################
+
 
     # Define the menu prices
     menu_prices = {
@@ -148,7 +152,8 @@ while cc:
                 )
 logging.info(f'The end of the Furth node results value: {messages} \n {results},\n{summary4}, \n{json_out4} ')
 
-###########################################################################################
+###########################  Node5  ######################################
+
 #
 dd=json.loads(json_out2)
 delivery_value = dd.get("delivery")
