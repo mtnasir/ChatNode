@@ -9,7 +9,7 @@
 # ChatNode is free software: you can redistribute it and/or modify
 # it under the terms of the MIT License as published by
 # the Massachusetts Institute of Technology. See the LICENSE file for details.
-
+import re
 import json
 import os
 from openai import OpenAI
@@ -25,7 +25,6 @@ class ChatNode:
         self.__role = role
         self.__messages = messages
         self.__output_json_formate=output_json_formate
-        self.recognizer = sr.Recognizer()
         self.client = OpenAI(
                 # This is the default and can be omitted
                 api_key=openai_api_key,

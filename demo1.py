@@ -14,18 +14,19 @@ logging.basicConfig(filename=log_filename, filemode='a', format='%(asctime)s - %
 
 
 ###########################  Node1  ######################################
-gaol="talk to customer and inquire the customer to give the full information his name and age, if customer don't want the buy just finish done in nan"
+goal = "Talk to the customer and ask for their full information, including name and age. If the customer doesn't want to buy just finish status in nan."
+# goal="talk to customer and inquire the customer to give the full information his name and age, if customer don't want the buy just finish status in nan"
 
 messages = [
-{"role": "system", "content": "You are a kind helpful call center assestant for the Arena shop , write a respond to customer to inqure the customer name and what is his age . make sure to have the folloing goal {gaol}. start greeting the customer in 20 words."},
+{"role": "system", "content": "You are a kind helpful call center assestant for the Arena shop , write a respond to customer to inqure the customer name and what is his age . make sure to have the folloing goal {goal}. start greeting the customer in 20 words."},
 ]	
 
-status= """ { "done": "true" or "false" or "nan"}"""
+status= """ { "status": "true" or "false" or "nan"}"""
 output_json_formate=""" { "name":  "  "   ,"age":   "  " }"""
 role1="You are a kind helpful call center assistant write a response to the customer."
 
 while True:
-    N1=ChatNode(gaol, status,role1,messages,output_json_formate)
+    N1=ChatNode(goal, status,role1,messages,output_json_formate)
     # print(N1)
     results,summary1, json_out, messages=N1.main()
     if results=="true" or results=="nan":
@@ -36,28 +37,28 @@ if results=="nan":
 logging.info(f'First node results value: {messages} \n {results},\n{summary1}, \n{json_out} ')
 ###########################  Node2  ######################################
 
-gaol=f"""  talk to customer and ask the customer if he want his order to be delevered by driver or not so the customer himself will reach the shop after fuew minites, if customer don't want the buy just finish done in nan.  the customer information given "information: {summary1}".  respond to the customer in 30 words."""
+goal=f"""  talk to customer and ask the customer if he want his order to be delevered by driver or not so the customer himself will reach the shop after fuew minites, if customer don't want the buy just finish status in nan.  the customer information given "information: {summary1}".  respond to the customer in 30 words."""
 print(summary1)
 print(">>>>>")
-print (gaol)
+print (goal)
 
 # new = [
-# {"role": "system", "content": f"You are a kind helpful call center assestant in a shop that buy coffee and tea, and want to write a reponse to customer to take his confirmation about his order as follows:  {gaol}"},
+# {"role": "system", "content": f"You are a kind helpful call center assestant in a shop that buy coffee and tea, and want to write a reponse to customer to take his confirmation about his order as follows:  {goal}"},
 # ]	
 messages = [
-{"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to inqure the customer name and what is his age . make sure to have the folloing goal {gaol}. start greeting the customer in 20 words."},
+{"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to inqure the customer name and what is his age . make sure to have the folloing goal {goal}. start greeting the customer in 20 words."},
 ]	
-messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {gaol}. in 20 words."},
+messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {goal}. in 20 words."},
             )
 
-status= """ { "done": "true" or "false" or "nan"}"""
+status= """ { "status": "true" or "false" or "nan"}"""
 output_json_formate=""" { "delivary: "yes" or "No",}"""
 role1="You are a kind helpful call center assistant."
 
 
 
 while True:
-    N2=ChatNode(gaol, status,role1,messages,output_json_formate)
+    N2=ChatNode(goal, status,role1,messages,output_json_formate)
     # print(N2)
     results,summary2, json_out2, messages=N2.main()
     if results=="true" or results=="nan":
@@ -90,15 +91,15 @@ menuq = {
     "Turkish Coffee": 0
 }
 menuS="Espresso, Cappuccino, Latte, Mocha, Iced Americano, Caramel Macchiato, Tea, Turkish Coffee"
-gaol=f"""  continou the conversation woth the customer and talk to customer and ask the customer what he requisted from the shop menu tht is shown in the website, and if he did't see the menu tell the customer more about is, the menu is {menuS}, and if customer don't want the buy just finish done in nan.  the customer information given "information: {summary1} and {summary2}".  respond to the customer in 30 words."""
-status= """ { "done": "true" or "false" or "nan"}"""
+goal=f"""  continou the conversation woth the customer and talk to customer and ask the customer what he requisted from the shop menu tht is shown in the website, and if he did't see the menu tell the customer more about is, the menu is {menuS}, and if customer don't want the buy just finish status in nan.  the customer information given "information: {summary1} and {summary2}".  respond to the customer in 30 words."""
+status= """ { "status": "true" or "false" or "nan"}"""
 output_json_formate= f""" "item": quantity, and this is a sample of the json output by filling the table {menuq}"""
-messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {gaol}. in 20 words."},
+messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {goal}. in 20 words."},
             )
 cc=True
 while cc:
     while True:
-        N3=ChatNode(gaol, status,role1,messages,output_json_formate)
+        N3=ChatNode(goal, status,role1,messages,output_json_formate)
         results,summary3, json_out3, messages=N3.main()
         if results=="true" or results=="nan":
             break
@@ -129,14 +130,14 @@ while cc:
     total_price = sum(menu_prices[item] * menu_quantities.get(item, 0) for item in menu_prices)
     print(f"Total price: ${total_price:.2f}")
 
-    gaol=f"""  continou the conversation woth the customer and talk to customer and ask the customer to confirm his order details, his order is summarized in: {summary3}, and the total price in dollar is {total_price} , and if customer don't want the buy just finish done in nan.   respond to the customer in 30 words."""
-    status= """ { "done": "true" or "false" or "nan"}"""
+    goal=f"""  continou the conversation woth the customer and talk to customer and ask the customer to confirm his order details, his order is summarized in: {summary3}, and the total price in dollar is {total_price} , and if customer don't want the buy just finish status in nan.   respond to the customer in 30 words."""
+    status= """ { "status": "true" or "false" or "nan"}"""
     output_json_formate=""" { "confirmed: "yes" or "No",}"""
-    messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {gaol}. in 20 words."},
+    messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {goal}. in 20 words."},
                 )
 
 
-    N4=ChatNode(gaol, status,role1,messages,output_json_formate)
+    N4=ChatNode(goal, status,role1,messages,output_json_formate)
     results,summary4, json_out4, messages=N4.main()
     if results=="true" or results=="nan":
         cc=False
@@ -145,10 +146,10 @@ while cc:
         N4.endconv()
     logging.info(f'Furth node results value: {messages} \n {results},\n{summary4}, \n{json_out4} ')
     menuS="Espresso, Cappuccino, Latte, Mocha, Iced Americano, Caramel Macchiato, Tea, Turkish Coffee"
-    gaol=f"""  talk to customer and ask the customer what he requisted from the shop menu , and if customer don't want the buy just finish done in nan.  the customer information given "information: {summary1} and {summary2} and {summary4}".  respond to the customer in 30 words."""
-    status= """ { "done": "true" or "false" or "nan"}"""
+    goal=f"""  talk to customer and ask the customer what he requisted from the shop menu , and if customer don't want the buy just finish status in nan.  the customer information given "information: {summary1} and {summary2} and {summary4}".  respond to the customer in 30 words."""
+    status= """ { "status": "true" or "false" or "nan"}"""
     output_json_formate= f""" "item": quantity, and this is a sample of the json output by filling the table {menuq}"""
-    messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , write a respond to customer to make sure to have the folloing goal {gaol}. in 20 words."},
+    messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , write a respond to customer to make sure to have the folloing goal {goal}. in 20 words."},
                 )
 logging.info(f'The end of the Furth node results value: {messages} \n {results},\n{summary4}, \n{json_out4} ')
 
@@ -158,13 +159,13 @@ logging.info(f'The end of the Furth node results value: {messages} \n {results},
 dd=json.loads(json_out2)
 delivery_value = dd.get("delivery")
 if delivery_value=="yes":
-    gaol=f"""  talk to customer and ask the customer about his address , and if customer don't want the buy just finish done in nan.  the customer information given "information: {summary1} and {summary2} and {summary4}".  respond to the customer in 20 words."""
-    status= """ { "done": "true" or "false" or "nan"}"""
+    goal=f"""  talk to customer and ask the customer about his address , and if customer don't want the buy just finish status in nan.  the customer information given "information: {summary1} and {summary2} and {summary4}".  respond to the customer in 20 words."""
+    status= """ { "status": "true" or "false" or "nan"}"""
     output_json_formate= f""" "address": "  "   """
-    messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {gaol}. in 20 words."},
+    messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {goal}. in 20 words."},
                 )
     while True:
-        N5=ChatNode(gaol, status,role1,messages,output_json_formate)
+        N5=ChatNode(goal, status,role1,messages,output_json_formate)
         results,summary5, json_out5, messages=N5.main()
         if results=="true" or results=="nan":
             break

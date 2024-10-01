@@ -34,6 +34,7 @@ if results=="nan":
     N1.endconv()
 
 logging.info(f'First node results value: {messages} \n {results},\n{summary1}, \n{json_out} ')
+
 ###########################  Node2  ######################################
 
 gaol=f"""  talk to customer and ask the customer if he want his order to be delevered by driver or not so the customer himself will reach the shop after fuew minites, if customer don't want the buy just finish done in nan.  the customer information given "information: {summary1}".  respond to the customer in 30 words."""

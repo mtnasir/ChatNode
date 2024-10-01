@@ -117,7 +117,7 @@ class ChatNode:
                 # Parse the JSON string
                 json_response = json.loads(model_response2)
                 # print("Parsed JSON response:", json_response)
-                return json_response['done'],rrole
+                return json_response['status'],rrole
            
             except json.JSONDecodeError as e:
                 print(f"Failed to decode JSON: {e}")
@@ -220,12 +220,6 @@ class ChatNode:
                 {"role": "user", "content": message},
             )
             
-            # Convert the list of dictionaries to a JSON string
-            json_string = json.dumps(self.__messages, indent=2)
-
-
-            # Convert the dictionary to a JSON string
-            messages_str = json.dumps(self.__messages)
             # print(messages_str)
             results,conv=self.checker()
 
