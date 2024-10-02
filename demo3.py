@@ -15,7 +15,6 @@ logging.basicConfig(filename=log_filename, filemode='a', format='%(asctime)s - %
 
 ###########################  Node1  ######################################
 goal = "Talk to the customer and ask for their full information, including name and age. If the customer doesn't want to buy just finish status in nan."
-# goal="talk to customer and inquire the customer to give the full information his name and age, if customer don't want the buy just finish status in nan"
 
 messages = [
 {"role": "system", "content": "You are a kind helpful call center assestant for the Arena shop , write a respond to customer to inqure the customer name and what is his age . make sure to have the folloing goal {goal}. start greeting the customer in 20 words."},
