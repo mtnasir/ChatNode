@@ -37,4 +37,4 @@ As shown in Figure 2, the conversation is divided into five separate nodes:
 
 For more details about this demo, refer to the YouTube video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0G2VooQyiIY?si=R4GqaMvCe9cq3xEb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[ChatNode Demo](https://www.youtube.com/embed/0G2VooQyiIY?si=R4GqaMvCe9cq3xEb)
