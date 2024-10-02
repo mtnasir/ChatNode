@@ -6,6 +6,11 @@ Follow these instructions to install ChatNode and its prerequisites. The code is
 
 ## Explanation of ChatNode
 
+
+as shown in figure1 :
+
+![figure1 image](image1.png) 
+
 ChatNode is a system designed to facilitate interactions between a client and a chatbot. It operates by processing inputs and generating outputs based on predefined roles and message histories. The ChatNode object requires five inputs:
 
 - **status**: Represents the possible status of the node output and is usually set as `status = """{ "status": "true" or "false" or "nan"}"""`;
@@ -19,7 +24,15 @@ ChatNode is a system designed to facilitate interactions between a client and a 
 
 - **output_json_format**: Specifies the format of the data extracted by the node, for example, `output_json_format = """{ "name": " ", "age": " " }"""`.
 
-To initialize a ChatNode object, use the following code: `N1 = ChatNode(goal, status, role, messages, output_json_format)`. To evaluate the ChatNode, use the method: `results, summary, json_out, messages = N1.run(messages)`. The node outputs the following variables:
+To initialize a ChatNode object, use the following code: 
+`N1 = ChatNode(goal, status, role, messages, output_json_format)`. 
+
+To evaluate the ChatNode, use the method: 
+`results, summary, json_out, messages = N1.run(messages)`. 
+To end the conversation duo to lack of information or be the cliant request , use the method: 
+N1.endconv() .
+
+The node outputs the following variables:
 
 - **results**: The current status of the ChatNode;
 
