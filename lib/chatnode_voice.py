@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # chatnode.py
 
-# Copyright (c) 2024 mtnasir
+# Copyright (c) 2024 mtnasir:  Mohammad Nasir
 # Email: eng.m.naser@gmail.com
 #
 # This file is part of ChatNode.
@@ -37,11 +37,10 @@ class ChatNode:
             )
         self.__messages = messages
 
-    
-    def beep(self,frequency, duration):
+    def __beep(self,frequency, duration):
         os.system(f'play -nq -t alsa synth {duration / 1000} sine {frequency}')
 
-    def record_and_transcribe(self):
+    def __record_and_transcribe(self):
         recognizer=self.recognizer
         # Use default microphone as the audio source
         with sr.Microphone() as source:
@@ -50,8 +49,8 @@ class ChatNode:
             # Adjust for ambient noise with a shorter duration
             recognizer.adjust_for_ambient_noise(source)
 
-            # Beep to signal the start of recording
-            self.beep(500, 200)  # Reduce beep duration to 200 ms
+            # __beep to signal the start of recording
+            self.__beep(500, 200)  # Reduce __beep duration to 200 ms
 
             # Record the audio with a timeout and phrase limit
             audio = recognizer.listen(source, timeout=5)
@@ -69,7 +68,7 @@ class ChatNode:
             except sr.RequestError as e:
                 print(f"Could not request results from Google Speech Recognition service; {e}")
     
-    def SpeakText(self,command):
+    def __speakText(self,command):
         # Initialize the engine
         engine = pyttsx3.init()
 
@@ -83,8 +82,7 @@ class ChatNode:
         engine.say(command)
         engine.runAndWait()
 
-
-    def checker(self):
+    def __checker(self):
        
         client=  self.client 
         prompt = (
@@ -128,8 +126,7 @@ class ChatNode:
             print("No JSON data found in the model response.")
             return "false",rrole
 
-
-    def summariser(self):
+    def __summariser(self):
         client=  self.client 
         message = ". summarise the customer request during the prevous conversation in a senstece with 20 words"
         self.__messages.append(
@@ -178,7 +175,7 @@ class ChatNode:
         )
         reply = chat_completion.choices[0].message.content
         self.__messages.append({"role": "assistant", "content": reply})
-        self.SpeakText(reply)
+        self.__speakText(reply)
         sys.exit()
 
     def run(self,messages):
@@ -192,17 +189,17 @@ class ChatNode:
             )
             reply = chat_completion.choices[0].message.content
             self.__messages.append({"role": "assistant", "content": reply})
-            self.SpeakText(reply)
+            self.__speakText(reply)
             import json
 
 
-            # MyText=self.record_and_transcribe()
+            # MyText=self.__record_and_transcribe()
             attempt = 0
             max_attempts = 3  # Number of times to retry
             
             while attempt < max_attempts:
                 try:
-                    MyText = self.record_and_transcribe()
+                    MyText = self.__record_and_transcribe()
                     MyText="the custormer said: "+MyText+". respond to the customer in 30 words."
 
                     break  # If successful, break out of the loop
@@ -222,11 +219,11 @@ class ChatNode:
             )
             
             # print(messages_str)
-            results,conv=self.checker()
+            results,conv=self.__checker()
 
             if results=="true":
                 # print("done with the data")
-                summary, json_out=self.summariser()
+                summary, json_out=self.__summariser()
                 print(summary)
                 # print(json_out)
                 return results,summary, json_out, self.__messages

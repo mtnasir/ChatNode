@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # chatnode.py
 
-# Copyright (c) 2024 mtnasir: Dr Mohammad Nasir
+# Copyright (c) 2024 mtnasir:  Mohammad Nasir
 # Email: eng.m.naser@gmail.com
 #
 # This file is part of ChatNode.
@@ -16,7 +16,6 @@ import pyttsx3
 import json
 import os
 import speech_recognition as sr
-# import winsound  # Import winsound or a similar library for non-Windows systems
 from openai import OpenAI
 import sys
 # Get the API key from the environment variable
