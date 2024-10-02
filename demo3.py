@@ -24,11 +24,11 @@ messages = [
 status= """ { "status": "true" or "false" or "nan"}"""
 output_json_formate=""" { "name":  "  "   ,"age":   "  " }"""
 role1="You are a kind helpful call center assistant write a response to the customer."
+N1=ChatNode(goal, status,role1,messages,output_json_formate)
 
 while True:
-    N1=ChatNode(goal, status,role1,messages,output_json_formate)
     # print(N1)
-    results,summary1, json_out, messages=N1.main()
+    results,summary1, json_out, messages=N1.run(messages)
     if results=="true" or results=="nan":
         break
 if results=="nan":
@@ -55,12 +55,11 @@ status= """ { "status": "true" or "false" or "nan"}"""
 output_json_formate=""" { "delivary: "yes" or "No",}"""
 role1="You are a kind helpful call center assistant."
 
-
+N2=ChatNode(goal, status,role1,messages,output_json_formate)
 
 while True:
-    N2=ChatNode(goal, status,role1,messages,output_json_formate)
     # print(N2)
-    results,summary2, json_out2, messages=N2.main()
+    results,summary2, json_out2, messages=N2.run(messages)
     if results=="true" or results=="nan":
         break
 if results=="nan":
@@ -97,10 +96,11 @@ output_json_formate= f""" "item": quantity, and this is a sample of the json out
 messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {goal}. in 20 words."},
             )
 cc=True
+N3=ChatNode(goal, status,role1,messages,output_json_formate)
+
 while cc:
     while True:
-        N3=ChatNode(goal, status,role1,messages,output_json_formate)
-        results,summary3, json_out3, messages=N3.main()
+        results,summary3, json_out3, messages=N3.run(messages)
         if results=="true" or results=="nan":
             break
     if results=="nan":
@@ -138,7 +138,7 @@ while cc:
 
 
     N4=ChatNode(goal, status,role1,messages,output_json_formate)
-    results,summary4, json_out4, messages=N4.main()
+    results,summary4, json_out4, messages=N4.run(messages)
     if results=="true" or results=="nan":
         cc=False
         break
@@ -164,9 +164,9 @@ if delivery_value=="yes":
     output_json_formate= f""" "address": "  "   """
     messages.append({"role": "system", "content": f"You are a kind helpful call center assestant for the Arena shop , continou the conversation woth the customer and write a respond to customer to make sure to have the folloing goal {goal}. in 20 words."},
                 )
+    N5=ChatNode(goal, status,role1,messages,output_json_formate)
     while True:
-        N5=ChatNode(goal, status,role1,messages,output_json_formate)
-        results,summary5, json_out5, messages=N5.main()
+        results,summary5, json_out5, messages=N5.run(messages)
         if results=="true" or results=="nan":
             break
     if results=="nan":
