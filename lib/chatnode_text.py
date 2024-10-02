@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # chatnode.py
 
-# Copyright (c) 2024 mtnasir
+# Copyright (c) 2024 mtnasir: Dr Mohammad Nasir
 # Email: eng.m.naser@gmail.com
 #
 # This file is part of ChatNode.
@@ -9,9 +9,14 @@
 # ChatNode is free software: you can redistribute it and/or modify
 # it under the terms of the MIT License as published by
 # the Massachusetts Institute of Technology. See the LICENSE file for details.
+
 import re
+import speech_recognition as sr
+import pyttsx3
 import json
 import os
+import speech_recognition as sr
+# import winsound  # Import winsound or a similar library for non-Windows systems
 from openai import OpenAI
 import sys
 # Get the API key from the environment variable
@@ -23,14 +28,17 @@ class ChatNode:
         self.__gaol = gaol
         self.__status = status
         self.__role = role
-        self.__messages = messages
         self.__output_json_formate=output_json_formate
+        self.recognizer = sr.Recognizer()
         self.client = OpenAI(
                 # This is the default and can be omitted
                 api_key=openai_api_key,
             )
+        messages.append({"role": "system", "content": self.__role},
+            )
+        self.__messages = messages
+
     
- 
     def record_and_transcribe(self):
         try:
             # Prompt the user to enter some text
@@ -42,14 +50,18 @@ class ChatNode:
 
             print("You said:", text)
             return text
-
         except ValueError as ve:
             print(ve)
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
-    
+
     def SpeakText(self,command):
-        print("The chatbot says: "+command)
+        print("The chatbot says: "+command) 
+
+
+
+    def SpeakText(self,command):
+       print("The chatbot says: "+command)
 
 
     def checker(self):
@@ -87,7 +99,7 @@ class ChatNode:
                 # Parse the JSON string
                 json_response = json.loads(model_response2)
                 # print("Parsed JSON response:", json_response)
-                return json_response['done'],rrole
+                return json_response['status'],rrole
            
             except json.JSONDecodeError as e:
                 print(f"Failed to decode JSON: {e}")
@@ -149,10 +161,9 @@ class ChatNode:
         self.SpeakText(reply)
         sys.exit()
 
-    def main(self):
-       
-       
-        
+    def run(self,messages):
+        self.__messages = messages
+             
         client= self.client 
         while True:
             chat_completion = client.chat.completions.create(
@@ -190,17 +201,11 @@ class ChatNode:
                 {"role": "user", "content": message},
             )
             
-            # Convert the list of dictionaries to a JSON string
-            json_string = json.dumps(self.__messages, indent=2)
-
-
-            # Convert the dictionary to a JSON string
-            messages_str = json.dumps(self.__messages)
             # print(messages_str)
             results,conv=self.checker()
 
             if results=="true":
-                print("done with the data")
+                # print("done with the data")
                 summary, json_out=self.summariser()
                 print(summary)
                 # print(json_out)

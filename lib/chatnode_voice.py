@@ -16,7 +16,6 @@ import pyttsx3
 import json
 import os
 import speech_recognition as sr
-# import winsound  # Import winsound or a similar library for non-Windows systems
 from openai import OpenAI
 import sys
 # Get the API key from the environment variable
