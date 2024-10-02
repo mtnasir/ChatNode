@@ -36,5 +36,5 @@ As shown in Figure 2, the conversation is divided into five separate nodes:
 ![figure2 image](image17.png)
 
 For more details about this demo, refer to the YouTube video:
+[Watch the video on YouTube](https://www.youtube.com/embed/0G2VooQyiIY?si=R4GqaMvCe9cq3xEb)
 
-[ChatNode Demo](https://www.youtube.com/embed/0G2VooQyiIY?si=R4GqaMvCe9cq3xEb)
