@@ -40,7 +40,6 @@ logging.info(f'First node results value: {messages} \n {results},\n{summary1}, \
 goal=f"""  talk to customer and ask the customer if he want his order to be delevered by driver or not so the customer himself will reach the shop after fuew minites, if customer don't want the buy just finish status in nan.  the customer information given "information: {summary1}".  respond to the customer in 30 words."""
 print(summary1)
 print(">>>>>")
-print (goal)
 
 # new = [
 # {"role": "system", "content": f"You are a kind helpful call center assestant in a shop that buy coffee and tea, and want to write a reponse to customer to take his confirmation about his order as follows:  {goal}"},
@@ -67,7 +66,7 @@ if results=="nan":
 
 logging.info(f'Second node results value: {messages} \n {results},\n{summary2}, \n{json_out2} ')
 ###########################  Node3  ######################################
-3
+
 
 menu = {
     "Espresso": 2.50,

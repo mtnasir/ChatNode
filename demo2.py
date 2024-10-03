@@ -39,7 +39,7 @@ logging.info(f'First node results value: {messages} \n {results},\n{summary1}, \
 goal=f"""  talk to customer and ask the customer if he want his order to be delevered by driver or not so the customer himself will reach the shop after fuew minites, if customer don't want the buy just finish status in nan.  the customer information given "information: {summary1}".  respond to the customer in 30 words."""
 print(summary1)
 print(">>>>>")
-print (goal)
+
 
 # new = [
 # {"role": "system", "content": f"You are a kind helpful call center assestant in a shop that buy coffee and tea, and want to write a reponse to customer to take his confirmation about his order as follows:  {goal}"},
@@ -66,7 +66,8 @@ if results=="nan":
 
 logging.info(f'Second node results value: {messages} \n {results},\n{summary2}, \n{json_out2} ')
 ###########################  Node3  ######################################
-3
+print(summary2)
+print(">>>>>")
 
 menu = {
     "Espresso": 2.50,
@@ -107,7 +108,8 @@ while cc:
 
     logging.info(f'Third node results value: {messages} \n {results},\n{summary3}, \n{json_out3} ')
 ###########################  Node 4 ######################################
-
+    print(summary3)
+    print(">>>>>")
     # Define the menu prices
     menu_prices = {
         "Espresso": 2.50,
@@ -153,7 +155,8 @@ while cc:
 logging.info(f'The end of the Furth node results value: {messages} \n {results},\n{summary4}, \n{json_out4} ')
 
 ###########################  Node5  ######################################
-
+print(summary4)
+print(">>>>>")
 #
 dd=json.loads(json_out2)
 delivery_value = dd.get("delivery")
@@ -172,7 +175,8 @@ if delivery_value=="yes":
         N5.endconv()
 
     logging.info(f'Fifth node results value: {messages} \n {results},\n{summary5}, \n{json_out5} ')
-
+    print(summary5)
+    print(">>>>>")
 
 
 

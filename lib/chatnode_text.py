@@ -36,9 +36,8 @@ class ChatNode:
         messages.append({"role": "system", "content": self.__role},
             )
         self.__messages = messages
-
     
-    def record_and_transcribe(self):
+    def __record_and_transcribe(self):
         try:
             # Prompt the user to enter some text
             text = input("Write your response: ")
@@ -54,16 +53,10 @@ class ChatNode:
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
-    def SpeakText(self,command):
+    def __SpeakText(self,command):
         print("The chatbot says: "+command) 
 
-
-
-    def SpeakText(self,command):
-       print("The chatbot says: "+command)
-
-
-    def checker(self):
+    def __checker(self):
        
         client=  self.client 
         prompt = (
@@ -107,8 +100,7 @@ class ChatNode:
             print("No JSON data found in the model response.")
             return "false",rrole
 
-
-    def summariser(self):
+    def __summariser(self):
         client=  self.client 
         message = ". summarise the customer request during the prevous conversation in a senstece with 20 words"
         self.__messages.append(
@@ -157,7 +149,7 @@ class ChatNode:
         )
         reply = chat_completion.choices[0].message.content
         self.__messages.append({"role": "assistant", "content": reply})
-        self.SpeakText(reply)
+        self.__SpeakText(reply)
         sys.exit()
 
     def run(self,messages):
@@ -171,17 +163,17 @@ class ChatNode:
             )
             reply = chat_completion.choices[0].message.content
             self.__messages.append({"role": "assistant", "content": reply})
-            self.SpeakText(reply)
+            self.__SpeakText(reply)
             import json
 
 
-            # MyText=self.record_and_transcribe()
+            # MyText=self.__record_and_transcribe()
             attempt = 0
             max_attempts = 3  # Number of times to retry
             
             while attempt < max_attempts:
                 try:
-                    MyText = self.record_and_transcribe()
+                    MyText = self.__record_and_transcribe()
                     MyText="the custormer said: "+MyText+". respond to the customer in 30 words."
 
                     break  # If successful, break out of the loop
@@ -201,11 +193,11 @@ class ChatNode:
             )
             
             # print(messages_str)
-            results,conv=self.checker()
+            results,conv=self.__checker()
 
             if results=="true":
                 # print("done with the data")
-                summary, json_out=self.summariser()
+                summary, json_out=self.__summariser()
                 print(summary)
                 # print(json_out)
                 return results,summary, json_out, self.__messages
