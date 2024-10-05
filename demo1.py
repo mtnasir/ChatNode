@@ -12,7 +12,6 @@ log_filename = os.path.join('log', f'logfile_{current_time}.log')  # Save inside
 # Configure logging with the dynamic filename
 logging.basicConfig(filename=log_filename, filemode='a', format='%(asctime)s - %(message)s', level=logging.INFO)
 
-
 ###########################  Node1  ######################################
 goal = "Talk to the customer and ask for his full information, including name and age. If the customer doesn't want to buy just finish status in nan."
 

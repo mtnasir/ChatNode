@@ -2,8 +2,8 @@
 
 ## Installation
 
-Follow these instructions to install ChatNode and its prerequisites. The code is developed on Ubuntu version 20.04. The required packages are: `re`, `speech_recognition` as `sr`, `pyttsx3`, `json`, and `openai`.
-
+Follow these instructions to install ChatNode and its prerequisites. The code is developed on Ubuntu version 20.04. The required packages are: `speech_recognition`, `pyttsx3`, and `openai`.
+ also you need to have "openai_api_key"
 ## Explanation of ChatNode
 
 As shown in Figure 1:

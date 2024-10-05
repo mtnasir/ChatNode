@@ -15,7 +15,6 @@ import speech_recognition as sr
 import pyttsx3
 import json
 import os
-import speech_recognition as sr
 from openai import OpenAI
 import sys
 # Get the API key from the environment variable
@@ -29,6 +28,8 @@ class ChatNode:
         self.__role = role
         self.__output_json_formate=output_json_formate
         self.recognizer = sr.Recognizer()
+        self.engine = pyttsx3.init()
+
         self.client = OpenAI(
                 # This is the default and can be omitted
                 api_key=openai_api_key,
@@ -70,17 +71,15 @@ class ChatNode:
     
     def __speakText(self,command):
         # Initialize the engine
-        engine = pyttsx3.init()
-
+        engine=self.engine
         # Set properties for clearer speech
-        rate = engine.getProperty('rate')   # Get the current speaking rate
-        engine.setProperty('rate', rate - 50)  # Slow down the speech (default rate is around 200 words per minute)
+        rate = self.engine.getProperty('rate')   # Get the current speaking rate
+        self.engine.setProperty('rate', rate - 50)  # Slow down the speech (default rate is around 200 words per minute)
 
-        volume = engine.getProperty('volume')  # Get the current volume level
-        engine.setProperty('volume', 1.0)  # Set volume level between 0.0 and 1.0
+        self.engine.setProperty('volume', 1.0)  # Set volume level between 0.0 and 1.0
 
-        engine.say(command)
-        engine.runAndWait()
+        self.engine.say(command)
+        self.engine.runAndWait()
 
     def __checker(self):
        
