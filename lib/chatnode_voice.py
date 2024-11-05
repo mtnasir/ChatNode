@@ -19,7 +19,14 @@ from openai import OpenAI
 import sys
 # Get the API key from the environment variable
 openai_api_key = os.getenv('OPENAI_API_KEY')
-
+from contextlib import contextmanager
+@contextmanager
+def tts_engine():
+    engine = pyttsx3.init()
+    try:
+        yield engine
+    finally:
+        engine.stop()  # Ensure the engine is properly stopped
 
 class ChatNode:
     def __init__(self, gaol, status,role,messages,output_json_formate):
@@ -68,18 +75,37 @@ class ChatNode:
                 print("Sorry, could not understand audio.")
             except sr.RequestError as e:
                 print(f"Could not request results from Google Speech Recognition service; {e}")
-    
-    def __speakText(self,command):
-        # Initialize the engine
-        engine=self.engine
-        # Set properties for clearer speech
-        rate = self.engine.getProperty('rate')   # Get the current speaking rate
-        self.engine.setProperty('rate', rate - 50)  # Slow down the speech (default rate is around 200 words per minute)
 
-        self.engine.setProperty('volume', 1.0)  # Set volume level between 0.0 and 1.0
 
-        self.engine.say(command)
-        self.engine.runAndWait()
+       
+    def speakText(self,command):
+        try:
+            # print("Initializing the TTS engine...")
+            with tts_engine() as engine:
+                # print("Engine initialized.")
+
+                # print("Setting properties...")
+                engine.setProperty('rate', 150)
+                engine.setProperty('volume', 1.0)
+
+                print("Speaking the command...")
+                engine.say(command)
+                engine.runAndWait()
+                print("Speech finished.")
+        except Exception as e:
+            print(f"Error during speech: {e}")
+
+    # def speakText(self,command):
+    #     # Initialize the engine
+    #     engine=self.engine
+    #     # Set properties for clearer speech
+    #     rate = self.engine.getProperty('rate')   # Get the current speaking rate
+    #     self.engine.setProperty('rate', rate - 50)  # Slow down the speech (default rate is around 200 words per minute)
+
+    #     self.engine.setProperty('volume', 1.0)  # Set volume level between 0.0 and 1.0
+
+    #     self.engine.say(command)
+    #     self.engine.runAndWait()
 
     def __checker(self):
        
@@ -174,7 +200,7 @@ class ChatNode:
         )
         reply = chat_completion.choices[0].message.content
         self.__messages.append({"role": "assistant", "content": reply})
-        self.__speakText(reply)
+        self.speakText(reply)
         sys.exit()
 
     def run(self,messages):
@@ -188,7 +214,7 @@ class ChatNode:
             )
             reply = chat_completion.choices[0].message.content
             self.__messages.append({"role": "assistant", "content": reply})
-            self.__speakText(reply)
+            self.speakText(reply)
             import json
 
 
