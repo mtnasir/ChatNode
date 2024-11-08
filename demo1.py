@@ -78,12 +78,12 @@ menu = {
     "Turkish Coffee": 3.50
 }
 menuq = {
-    "Espresso": 1,
-    "Cappuccino": 1,
+    "Espresso": 0,
+    "Cappuccino": 0,
     "Latte": 0,
     "Mocha": 0,
     "Iced Americano": 0,
-    "Caramel Macchiato": 2,
+    "Caramel Macchiato": 0,
     "Tea": 0,
     "Turkish Coffee": 0
 }
